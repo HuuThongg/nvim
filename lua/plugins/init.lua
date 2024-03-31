@@ -1,24 +1,14 @@
 return {
   {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+  {
     "stevearc/conform.nvim",
     event = "BufWritePre", -- uncomment for format on save
     config = function()
       require "configs.conform"
     end,
-  },
-
-  -- These are some examples, uncomment them if you want to see them work!
-  {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
-    end,
-    -- opts = {
-    --   servers = {
-    --     tailwindcss = {}
-    --   }
-    -- }
   },
   --
   {
@@ -63,9 +53,9 @@ return {
       },
     },
   },
-  -- {
-  --   "williamboman/mason-lspconfig.nvim",
-  -- },
+  {
+    "williamboman/mason-lspconfig.nvim",
+  },
   {
     "windwp/nvim-ts-autotag",
     lazy = false,
@@ -91,11 +81,48 @@ return {
     opts = {
       user_default_options = {
         tailwind = true,
-      }
-    }
+      },
+    },
   },
+  -- {
+  --   "github/copilot.vim",
+  --   lazy = false,
+  -- },
+  -- {
+  --   "catppuccin/nvim",
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   flavour = "mocha",
+  --   background = {
+  --     dark = "mocha",
+  --     light = "latte",
+  --   },
+  -- },
+
+  -- These are some examples, uncomment them if you want to see them work!
   {
-    "github/copilot.vim",
-    lazy = false,
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("nvchad.configs.lspconfig").defaults()
+      require "configs.lspconfig"
+    end,
+    -- opts = {
+    --   servers = {
+    --     tailwindcss = {}
+    --   }
+    -- }
+  },
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   init = function()
+  --     require("core.utils").load_mappings("dap")
+  --   end
+  -- },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = "go",
+    opts = function()
+      return require "lua.configs.plugins.null-ls"
+    end,
   },
 }

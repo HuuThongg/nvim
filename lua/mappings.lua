@@ -4,14 +4,18 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- Tmux config
+
+map("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { desc = "Switch Window left" })
+map("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>", { desc = "Switch Window right" })
+map("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { desc = "Switch Window down" })
+map("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { desc = "Switch Window up" })
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 --
-
-
-
 
 -- Default settings
 -- map("i", "<C-b>", "<ESC>^i", { desc = "Move Beginning of line" })

@@ -5,14 +5,15 @@
 local M = {}
 
 M.ui = {
-  theme = "onedark",
+  theme = "catppuccin",
 
   -- hl_override = {
   -- 	Comment = { italic = true },
   -- 	["@comment"] = { italic = true },
   -- },
-  -- transparency = true
-   statusline = {
+  -- transparency = true,
+  statusline = {
+
     theme = "default", -- default/vscode/vscode_colored/minimal
     -- default/round/block/arrow separators work only for default statusline theme
     -- round and block will work for minimal theme only
