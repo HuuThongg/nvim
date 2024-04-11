@@ -28,7 +28,7 @@ return {
         "goimports-reviser",
         "golines",
         "sqls",
-        "tailwindcss",
+        -- "tailwindcss",
         "typescript-language-server",
         "tailwindcss-language-server",
       },
@@ -121,8 +121,8 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     ft = "go",
-    opts = function()
-      return require "lua.configs.plugins.null-ls"
-    end,
+    -- opts = function()
+    --   return require "lua.configs.plugins.null-ls"
+    -- end,
   },
 }
