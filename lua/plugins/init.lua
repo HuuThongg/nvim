@@ -28,6 +28,7 @@ return {
         "goimports-reviser",
         "golines",
         "sqls",
+        "ccls",
         -- "tailwindcss",
         "typescript-language-server",
         "tailwindcss-language-server",
@@ -106,11 +107,11 @@ return {
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
-    -- opts = {
-    --   servers = {
-    --     tailwindcss = {}
-    --   }
-    -- }
+    opts = {
+      servers = {
+        tailwindcss = {},
+      },
+    },
   },
   -- {
   --   "mfussenegger/nvim-dap",
@@ -122,7 +123,11 @@ return {
     "jose-elias-alvarez/null-ls.nvim",
     ft = "go",
     -- opts = function()
+    -- <<<<<<< Updated upstream
     --   return require "lua.configs.plugins.null-ls"
+    -- =======
+    --   return require "configs.plugins.null-ls"
+    -- >>>>>>> Stashed changes
     -- end,
   },
 }
