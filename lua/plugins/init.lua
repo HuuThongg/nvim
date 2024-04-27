@@ -1,4 +1,20 @@
 return {
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    ft = "go",
+    -- event ="VeryLazy"
+    -- opts = function ()
+    --
+    -- end,V
+    -- opts = function()
+    -- <<<<<<< Updated upstream
+    --   return require "lua.configs.plugins.null-ls"
+    -- =======
+    --   return require "configs.plugins.null-ls"
+    -- >>>>>>> Stashed changes
+    -- end,
+  },
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
@@ -17,10 +33,11 @@ return {
       ensure_installed = {
         "lua-language-server",
         "stylua",
-        "html-lsp",
-        "css-lsp",
-        "prettier",
-        "prettierd",
+        "clang-format",
+        -- "html-lsp",
+        -- "css-lsp",
+        -- "prettier",
+        -- "prettierd",
         "gopls",
         "gofumpt",
         "goimports",
@@ -28,10 +45,11 @@ return {
         "goimports-reviser",
         "golines",
         "sqls",
-        "ccls",
+        -- "ccls",
+        "clangd",
         -- "tailwindcss",
-        "typescript-language-server",
-        "tailwindcss-language-server",
+        -- "typescript-language-server",
+        -- "tailwindcss-language-server",
       },
     },
   },
@@ -72,18 +90,35 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup {
-        css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
-        javascript = { rgb_fn = true }, -- Enable parsing rgb(...) functions in javascript.
-        html = { names = true }, -- Enable parsing color names in html.
-      }
-    end,
+    -- config = function()
+    --   require("colorizer").setup {
+    --     css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
+    --     javascript = { rgb_fn = true }, -- Enable parsing rgb(...) functions in javascript.
+    --     html = { names = true }, -- Enable parsing color names in html.
+    --     tailwind = true,
+    --   }
+    -- end,
     opts = {
+      css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
+      javascript = { rgb_fn = true }, -- Enable parsing rgb(...) functions in javascript.
+      html = { names = true }, -- Enable parsing color names in html.
       user_default_options = {
         tailwind = true,
       },
     },
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+    },
+    opts = function(_, opts)
+      local format_kinds = opts.formatting.format
+      opts.formatting.format = function(entry, item)
+        format_kinds(entry, item) -- add icons
+        return require("tailwindcss-colorizer-cmp").formatter(entry, item)
+      end
+    end,
   },
   -- {
   --   "github/copilot.vim",
@@ -119,15 +154,4 @@ return {
   --     require("core.utils").load_mappings("dap")
   --   end
   -- },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    ft = "go",
-    -- opts = function()
-    -- <<<<<<< Updated upstream
-    --   return require "lua.configs.plugins.null-ls"
-    -- =======
-    --   return require "configs.plugins.null-ls"
-    -- >>>>>>> Stashed changes
-    -- end,
-  },
 }
