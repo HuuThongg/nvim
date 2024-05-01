@@ -3,17 +3,6 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     ft = "go",
-    -- event ="VeryLazy"
-    -- opts = function ()
-    --
-    -- end,V
-    -- opts = function()
-    -- <<<<<<< Updated upstream
-    --   return require "lua.configs.plugins.null-ls"
-    -- =======
-    --   return require "configs.plugins.null-ls"
-    -- >>>>>>> Stashed changes
-    -- end,
   },
   {
     "christoomey/vim-tmux-navigator",
@@ -50,6 +39,7 @@ return {
         -- "tailwindcss",
         -- "typescript-language-server",
         -- "tailwindcss-language-server",
+        "svelte-language-server",
       },
     },
   },
@@ -69,6 +59,7 @@ return {
         "go",
         "rust",
         "slang",
+        "svelte",
       },
     },
   },
@@ -90,21 +81,9 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    -- config = function()
-    --   require("colorizer").setup {
-    --     css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
-    --     javascript = { rgb_fn = true }, -- Enable parsing rgb(...) functions in javascript.
-    --     html = { names = true }, -- Enable parsing color names in html.
-    --     tailwind = true,
-    --   }
-    -- end,
     opts = {
-      css = { rgb_fn = true }, -- Enable parsing rgb(...) functions in css.
-      javascript = { rgb_fn = true }, -- Enable parsing rgb(...) functions in javascript.
-      html = { names = true }, -- Enable parsing color names in html.
-      user_default_options = {
-        tailwind = true,
-      },
+      -- Attach to buffer
+      require("colorizer").attach_to_buffer(0, { mode = "background", css = true }),
     },
   },
   {
@@ -120,10 +99,6 @@ return {
       end
     end,
   },
-  -- {
-  --   "github/copilot.vim",
-  --   lazy = false,
-  -- },
   -- {
   --   "catppuccin/nvim",
   --   name = "catppuccin",
@@ -154,4 +129,39 @@ return {
   --     require("core.utils").load_mappings("dap")
   --   end
   -- },
+  {
+    "brenoprata10/nvim-highlight-colors",
+    opts = {
+      ---Render style
+      ---@usage 'background'|'foreground'|'virtual'
+      render = "background",
+
+      ---Set virtual symbol (requires render to be set to 'virtual')
+      virtual_symbol = "■",
+
+      ---Highlight named colors, e.g. 'green'
+      enable_named_colors = true,
+
+      ---Highlight tailwind colors, e.g. 'bg-blue-500'
+      enable_tailwind = true,
+
+      ---Set custom colors
+      ---Label must be properly escaped with '%' to adhere to `string.gmatch`
+      --- :help string.gmatch
+      custom_colors = {
+        { label = "%-%-theme%-primary%-color", color = "#0f1219" },
+        { label = "%-%-theme%-secondary%-color", color = "#5a5d64" },
+      },
+    },
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end,
+  },
 }

@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "gopls", "tailwindcss", "ccls" }
+local servers = { "html", "cssls", "gopls", "tailwindcss", "ccls", "svelte" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -45,4 +45,8 @@ lspconfig.clangd.setup {
     on_attach(client, bufnr)
   end,
   capabilities = capabilities,
+}
+
+capabilities.textDocument.colorProvider = {
+  dynamicRegistration = true,
 }
