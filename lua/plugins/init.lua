@@ -79,13 +79,24 @@ return {
       },
     },
   },
-  {
-    "NvChad/nvim-colorizer.lua",
-    opts = {
-      -- Attach to buffer
-      require("colorizer").attach_to_buffer(0, { mode = "background", css = true }),
-    },
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   opts = {
+  --     -- Attach to buffer
+  --     require("colorizer").attach_to_buffer(0, { mode = "background", css = true }),
+  --   },
+  -- },
+{
+  "NvChad/nvim-colorizer.lua",
+  opts = {
+    -- Default options can be set here if needed
   },
+  config = function()
+    require("colorizer").setup() -- Initialize the colorizer
+    -- Attach colorizer to current buffer
+    require("colorizer").attach_to_buffer(0, { mode = "background", css = true })
+  end,
+},
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -163,5 +174,48 @@ return {
         -- Configuration here, or leave empty to use defaults
       }
     end,
+  },
+  -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins
+  --
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    event = "BufReadPost",
+  },
+  {
+    "numToStr/Comment.nvim",
+    opts = function()
+      require("Comment").setup {
+        pre_hook = function(ctx)
+          local U = require "Comment.utils"
+
+          -- Determine the location where the commentstring is needed
+          local location = nil
+          if ctx.ctype == U.ctype.block then
+            location = require("ts_context_commentstring.utils").get_cursor_location()
+          elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
+            location = require("ts_context_commentstring.utils").get_visual_start_location()
+          end
+
+          -- Use the calculated commentstring
+          return require("ts_context_commentstring.internal").calculate_commentstring {
+            key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
+            location = location,
+          }
+        end,
+      }
+    end,
+  },
+  {
+    "olexsmir/gopher.nvim",
+    ft = "go",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    -- (optional) will update plugin's deps on every update
+    build = function()
+      vim.cmd.GoInstallDeps()
+    end,
+    opts = {},
   },
 }

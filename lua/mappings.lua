@@ -151,3 +151,25 @@ map("n", "<leader>cc", function()
     end
   end
 end, { desc = "Blankline Jump to current context" })
+
+-- THong added
+map({ "n", "t" }, "<A-i>", function()
+  require("nvchad.term").toggle {
+    pos = "float",
+    id = "floatTerm",
+    winopts = { winhl = "Normal:floatTermBg,FloatBorder:floatTermBorder" },
+  }
+end, { desc = "terminal toogle floating term" })
+
+map({ "n" }, "<C-t>", function()
+  require("minty.huefy").open { border = true, mouse = true }
+end, {})
+
+map({ "n", "v" }, "<RightMouse>", function()
+  vim.cmd.exec '"normal! \\<RightMouse>"'
+  require("plenary.reload").reload_module "menus"
+  require("plenary.reload").reload_module "menu"
+
+  local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+  require("menu").open(options, { mouse = true })
+end, {})

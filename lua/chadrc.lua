@@ -21,6 +21,12 @@ M.ui = {
     order = nil,
     modules = nil,
   },
+  cmp = {
+    icons_left = true,
+    format_colors = {
+      tailwind = true,
+    },
+  },
 }
 
 return M

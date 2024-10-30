@@ -4,7 +4,7 @@ local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "gopls", "tailwindcss", "ccls", "svelte" }
+local servers = { "html", "cssls", "tailwindcss", "ccls", "svelte" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -16,29 +16,29 @@ for _, lsp in ipairs(servers) do
 end
 
 -- typescript
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   on_init = on_init,
   capabilities = capabilities,
 }
-
+-- local root_dir = require "lspconfig/util"
 -- go
--- lspconfig.gopls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   cmd = { "gopls" },
---   filetypes = { "go", "gomod", "gowork", "gotmpl" },
---   root_dir = util.root_pattern("go.work", "go.mod", ".git"),
---   settings = {
---     gopls = {
---       completeUnimported = true,
---       usePlaceholders = true,
---       analyses = {
---         unusedparams = true,
---       },
---     },
---   },
--- }
+lspconfig.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  -- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      completeUnimported = true,
+      usePlaceholders = true,
+      analyses = {
+        unusedparams = true,
+      },
+    },
+  },
+}
 lspconfig.clangd.setup {
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
